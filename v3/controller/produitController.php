@@ -1,6 +1,5 @@
 <?php
 
-require_once("./model/database.php");
 require_once("./model/produit.php");
 
 
@@ -13,8 +12,9 @@ class ProduitController {
 
     //Méthodes
     function index(){
+        global $twig;
         $produits = $this->produitModel->getAll();
-        require_once("view/list.php");
+        echo $twig->render('list.html.twig', ["products" => $produits]);
     }
 
     function create(){
@@ -28,6 +28,16 @@ class ProduitController {
 
     function remove($id){
         $this->produitModel->delete($id);
+        header('location:index.php');
+    }
+    
+    function edit($id){
+        $produit = $this->produitModel->findByIdProduit($id);
+        require_once("view/edit.php");
+    }
+
+     function updateProduit(){
+        $this->produitModel->update($_POST);
         header('location:index.php');
     }
 }

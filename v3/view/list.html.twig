@@ -1,0 +1,25 @@
+<a href="?action=addProduct">ADD</a>
+<table>
+
+        <tr>
+            <th>ID</th>
+            <td>Libelle</td>
+            <th>Quantite</th>
+            <th>Prix</th>
+        </tr>
+       
+        {% for r in products %}
+            <tr>
+                <td>{{r.getId()}}</td>
+                <td>{{r.getLibelle() |upper }}</td>
+                <td>{{r.getQuantite()}}</td>
+                <td>{{r.getPrix() }}</td>
+                <td>
+                    <a href="?action=deleteProduct&id={{r.getId()}}">Supprimer</a>
+                    <br>
+                    <a href="?action=modifProduct&id={{r.getId()}}">Modifier</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+</table>
